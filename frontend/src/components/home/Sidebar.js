@@ -5,7 +5,7 @@ import { MdLabelImportant } from "react-icons/md";
 import { TbNotebookOff } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const data = [
     {
       title: "All tasks",
@@ -31,11 +31,6 @@ const Sidebar = () => {
 
   return (
     <>
-      <div>
-        <h2 className="text-xl font-bold">Task Manager</h2>
-        <h4 className="mb-1 text-gray-400">task@gmail.com</h4>
-        <hr />
-      </div>
       <div>
         {data.map((items, i) => (
           <Link to={items.link} key={i} className="flex items-center gap-3 my-2 hover:bg-gray-600 p-2 rounded transition-all duration-300">
