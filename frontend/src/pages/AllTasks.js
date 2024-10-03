@@ -11,7 +11,7 @@ const AllTasks = () => {
 
   return (
     <>
-      <div>
+      <div className="h-[600px] overflow-x-hidden">
         <div className="flex justify-end w-full px-4 py-2">
           <button onClick={() => setInputDiv("fixed")}>
             <IoIosAddCircleOutline className="text-4xl text-gray-400 hover:text-gray-100 transition-all duration-300" />

@@ -1,7 +1,6 @@
 import React from "react";
 import { CgNotes } from "react-icons/cg";
 import { FaCheckDouble } from "react-icons/fa";
-import { MdLabelImportant } from "react-icons/md";
 import { TbNotebookOff } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -19,11 +18,6 @@ const Sidebar = (props) => {
       title: "All tasks",
       icon: <CgNotes />,
       link: "/",
-    },
-    {
-      title: "Important tasks",
-      icon: <MdLabelImportant />,
-      link: "/importantTasks",
     },
     {
       title: "Completed tasks",
