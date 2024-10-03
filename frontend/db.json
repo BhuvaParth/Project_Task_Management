@@ -15,24 +15,10 @@
   ],
   "carddata": [
     {
-      "title": "The Best Coding Practice",
-      "desc": "I have to create a Netflix Clone project for practice",
-      "status": "In Complete"
-    },
-    {
-      "title": "The Best Coding With NextJs",
-      "desc": "I have to create an Airbnb Clone project for practice",
-      "status": "Complete"
-    },
-    {
       "title": "The Best Coding Self",
       "desc": "I have to create a task management project for practice",
-      "status": "In Complete"
-    },
-    {
-      "title": "The Best Chat App",
-      "desc": "I have to create a live chat project for practice",
-      "status": "In Complete"
+      "status": "Complete",
+      "id": "f058"
     }
   ]
 }

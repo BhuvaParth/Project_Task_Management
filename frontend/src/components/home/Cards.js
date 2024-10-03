@@ -7,7 +7,6 @@ const Cards = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:3000/carddata'); 
@@ -20,6 +19,54 @@ const Cards = (props) => {
 
     fetchData();
   }, []);
+
+  const handleDeletedata = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/carddata/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Update local state to remove the deleted item
+        setData((prevData) => prevData.filter((item) => item.id !== id));
+        console.log("Data deleted successfully!");
+      } else {
+        console.error("Error deleting data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
+  const handleToggleStatus = async (id, currentStatus) => {
+    const newStatus = currentStatus === "In Complete" ? "Complete" : "In Complete"; // Toggle status
+
+    const updatedData = {
+      ...data.find((item) => item.id === id), // Get the current data for the item
+      status: newStatus,
+    };
+
+    try {
+      const response = await fetch(`http://localhost:3000/carddata/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData), // Send updated data
+      });
+
+      if (response.ok) {
+        setData((prevData) =>
+          prevData.map((item) => (item.id === id ? updatedData : item))
+        ); // Update local state
+        console.log("Status updated successfully!");
+      } else {
+        console.error("Error updating status:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
 
   return (
     <div className="grid grid-cols-3 gap-4 p-4">
@@ -37,8 +84,9 @@ const Cards = (props) => {
                     ? "bg-red-400"
                     : "bg-green-700"
                 } p-2 rounded w-2/6`}
+                onClick={() => handleToggleStatus(items.id, items.status)} // Call the toggle function
               >
-                {items.status}
+                {items.status} {/* Display status here */}
               </button>
               <div className="flex justify-between text-white p-2 w-2/6 text-2xl font-semibold">
                 <button>
@@ -47,7 +95,7 @@ const Cards = (props) => {
                 <button>
                   <CiEdit />
                 </button>
-                <button>
+                <button onClick={() => handleDeletedata(items.id)}>
                   <AiOutlineDelete />
                 </button>
               </div>
