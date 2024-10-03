@@ -5,17 +5,21 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 
 const Cards = (props) => {
   const [data, setData] = useState([]);
-  const { setEditDiv, setEditData, showCompletedOnly } = props;
+  const { setEditDiv, setEditData, showCompletedOnly, home } = props;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:3000/carddata");
         const result = await response.json();
-        
-        const filteredData = showCompletedOnly
-          ? result.filter((task) => task.status === "Complete") 
-          : result.filter((task) => task.status === "In Complete"); 
+
+        // Filter data based on the showCompletedOnly prop
+        const filteredData = 
+          showCompletedOnly === true
+            ? result.filter((task) => task.status === "Complete") // Only completed tasks
+            : showCompletedOnly === false
+              ? result.filter((task) => task.status === "In Complete") // Only incomplete tasks
+              : result; // All tasks (when showCompletedOnly is null)
 
         setData(filteredData);
       } catch (error) {
@@ -113,7 +117,7 @@ const Cards = (props) => {
         <p className="text-white">No tasks found.</p>
       )}
 
-      {props.home === "true" && !showCompletedOnly && (
+      {home === "true" && showCompletedOnly === null && ( // Show the add task button only in AllTasks
         <button
           type="button"
           className="flex flex-col justify-center items-center bg-gray-800 rounded-sm p-4 text-gray-300 hover:scale-105 hover:cursor-pointer transition-all duration-300"
