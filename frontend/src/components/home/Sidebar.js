@@ -10,8 +10,8 @@ const Sidebar = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
-    props.onLogout(); // Call the parent component's logout function if needed
-    navigate("/login"); // Redirect to the login page
+    props.onLogout(); 
+    navigate("/login"); 
   };
 
   const data = [

@@ -5,13 +5,14 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 
 const Cards = (props) => {
   const [data, setData] = useState([]);
+  const { setEditDiv, setEditData } = props;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/carddata'); 
+        const response = await fetch("http://localhost:3000/carddata");
         const result = await response.json();
-        setData(result); 
+        setData(result);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -23,11 +24,10 @@ const Cards = (props) => {
   const handleDeletedata = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/carddata/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
-        // Update local state to remove the deleted item
         setData((prevData) => prevData.filter((item) => item.id !== id));
         console.log("Data deleted successfully!");
       } else {
@@ -39,26 +39,27 @@ const Cards = (props) => {
   };
 
   const handleToggleStatus = async (id, currentStatus) => {
-    const newStatus = currentStatus === "In Complete" ? "Complete" : "In Complete"; // Toggle status
+    const newStatus =
+      currentStatus === "In Complete" ? "Complete" : "In Complete";
 
     const updatedData = {
-      ...data.find((item) => item.id === id), // Get the current data for the item
+      ...data.find((item) => item.id === id),
       status: newStatus,
     };
 
     try {
       const response = await fetch(`http://localhost:3000/carddata/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedData), // Send updated data
+        body: JSON.stringify(updatedData),
       });
 
       if (response.ok) {
         setData((prevData) =>
           prevData.map((item) => (item.id === id ? updatedData : item))
-        ); // Update local state
+        );
         console.log("Status updated successfully!");
       } else {
         console.error("Error updating status:", response.statusText);
@@ -68,11 +69,19 @@ const Cards = (props) => {
     }
   };
 
+  const handleEdit = (item) => {
+    setEditDiv("fixed");
+    setEditData(item);
+  };
+
   return (
-    <div className="grid grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-3 gap-4 p-4 h-[600px] overflow-x-hidden">
       {data.length > 0 &&
         data.map((items, i) => (
-          <div key={i} className="flex flex-col justify-between bg-gray-800 rounded-sm p-4">
+          <div
+            key={i}
+            className="flex flex-col justify-between bg-gray-800 rounded-sm p-4"
+          >
             <div>
               <h3 className="text-xl font-semibold">{items.title}</h3>
               <p className="text-gray-300 my-2">{items.desc}</p>
@@ -80,19 +89,14 @@ const Cards = (props) => {
             <div className="flex justify-between items-center w-full mt-4">
               <button
                 className={`${
-                  items.status === "In Complete"
-                    ? "bg-red-400"
-                    : "bg-green-700"
+                  items.status === "In Complete" ? "bg-red-400" : "bg-green-700"
                 } p-2 rounded w-2/6`}
-                onClick={() => handleToggleStatus(items.id, items.status)} // Call the toggle function
+                onClick={() => handleToggleStatus(items.id, items.status)}
               >
-                {items.status} {/* Display status here */}
+                {items.status}
               </button>
-              <div className="flex justify-between text-white p-2 w-2/6 text-2xl font-semibold">
-                <button>
-                  <CiHeart />
-                </button>
-                <button>
+              <div className="flex justify-between text-white p-2 w-3/12 text-2xl font-semibold">
+                <button onClick={() => handleEdit(items)}>
                   <CiEdit />
                 </button>
                 <button onClick={() => handleDeletedata(items.id)}>

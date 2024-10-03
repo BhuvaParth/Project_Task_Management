@@ -4,13 +4,11 @@ import { RxCross2 } from "react-icons/rx";
 const DataOfInput = (props) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [statusMessage, setStatusMessage] = useState("Ready to submit."); // Default status message
+  const [statusMessage, setStatusMessage] = useState("Ready to submit.");
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page refresh on form submission
-
-    // Add default status to newData
-    const newData = { title, desc, status: "In Complete" }; // Create an object to hold the data
+    e.preventDefault(); 
+    const newData = { title, desc, status: "In Complete" }; 
 
     try {
       const response = await fetch("http://localhost:3000/carddata", {
@@ -18,23 +16,22 @@ const DataOfInput = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newData), // Convert the data to JSON
+        body: JSON.stringify(newData),
       });
 
       if (response.ok) {
-        setStatusMessage("Data added successfully!"); // Set success message
+        setStatusMessage("Data added successfully!");
         console.log("Data added successfully!");
-        // Optionally reset the form or close the modal
         setTitle("");
         setDesc("");
         props.setInputDiv("hidden");
       } else {
-        const errorText = await response.text(); // Get error response text
-        setStatusMessage(`Error adding data: ${errorText}`); // Set error message
+        const errorText = await response.text(); 
+        setStatusMessage(`Error adding data: ${errorText}`); 
         console.error("Error adding data:", response.statusText);
       }
     } catch (error) {
-      setStatusMessage(`Error adding data: ${error.message}`); // Set error message for catch block
+      setStatusMessage(`Error adding data: ${error.message}`); 
       console.error("Error adding data:", error);
     }
   };
@@ -71,7 +68,7 @@ const DataOfInput = (props) => {
               Submit
             </button>
           </form>
-          {statusMessage && ( // Conditionally render the status message
+          {statusMessage && (
             <div className="mt-3 text-center text-white">
               {statusMessage}
             </div>

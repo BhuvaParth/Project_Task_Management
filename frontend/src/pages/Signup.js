@@ -16,7 +16,6 @@ const Signup = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*]{6,8}$/;
 
-    // Username validation
     if (!formData.username.trim()) {
       errors.username = "Username is required";
     } else if (!usernameRegex.test(formData.username)) {
@@ -24,14 +23,11 @@ const Signup = () => {
         "Username must be 3-20 characters and can include letters, numbers, and underscores";
     }
 
-    // Email validation
     if (!formData.email.trim()) {
       errors.email = "Email is required";
     } else if (!emailRegex.test(formData.email)) {
       errors.email = "Invalid email format";
     }
-
-    // Password validation
     if (!formData.password.trim()) {
       errors.password = "Password is required";
     } else if (!passwordRegex.test(formData.password)) {
@@ -42,7 +38,6 @@ const Signup = () => {
     return Object.keys(errors).length === 0;
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -68,8 +63,6 @@ const Signup = () => {
     <div className="flex items-center justify-center h-[98vh]">
       <div className="bg-gray-800 rounded w-2/6 p-4">
         <div className="text-2xl font-semibold">Signup</div>
-
-        {/* Username Input */}
         <input
           type="text"
           placeholder="Username"
@@ -79,8 +72,6 @@ const Signup = () => {
           onChange={handleChange}
         />
         {errors.username && <p className="text-red-500">{errors.username}</p>}
-
-        {/* Email Input */}
         <input
           type="email"
           placeholder="Email"
@@ -90,8 +81,6 @@ const Signup = () => {
           onChange={handleChange}
         />
         {errors.email && <p className="text-red-500">{errors.email}</p>}
-
-        {/* Password Input */}
         <input
           type="password"
           placeholder="Password"
@@ -101,8 +90,6 @@ const Signup = () => {
           onChange={handleChange}
         />
         {errors.password && <p className="text-red-500">{errors.password}</p>}
-
-        {/* Submit Button */}
         <div className="flex justify-between items-center w-full">
           <button
             className="text-black text-l font-semibold bg-blue-400 rounded px-4 py-2"

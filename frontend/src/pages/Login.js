@@ -44,7 +44,7 @@ const Login = ({ onLogin }) => {
 
       if (user) {
         console.log("Login successful");
-        localStorage.setItem("isAuthenticated", "true"); // Set authentication state
+        localStorage.setItem("isAuthenticated", "true"); 
         onLogin();
         navigate("/");
       } else {
