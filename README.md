@@ -30,6 +30,7 @@ incomplete and edit task details as needed. The data is stored in a local JSON s
 ## Installation
 
   ### Go to Frontend folder and enter this commands
+   #### Please Check must be your localhost:3001 for frontend
 
   ``` bash
    npm install
@@ -37,6 +38,8 @@ incomplete and edit task details as needed. The data is stored in a local JSON s
   ```
 
   ##  Start Json Server
+  
+   ### Please Check must be your localhost:3000 for json server
 
   ``` bash
 npx json-server --watch db.json --port 3000
