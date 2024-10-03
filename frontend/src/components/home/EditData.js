@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { toast, ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 export const EditData = (props) => {
   const { editData, setEditDiv } = props; 
   const [title, setTitle] = useState(editData?.title || "");
   const [desc, setDesc] = useState(editData?.desc || "");
   const [status, setStatus] = useState(editData?.status || "In Complete");
-  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
     setTitle(editData?.title || "");
@@ -30,19 +31,20 @@ export const EditData = (props) => {
       );
 
       if (response.ok) {
-        setStatusMessage("Data updated successfully!");
+        toast.success("Data updated successfully!"); 
         setEditDiv("hidden");
       } else {
-        setStatusMessage("Error updating data");
+        toast.error("Error updating data"); 
       }
     } catch (error) {
       console.error("Error updating data:", error);
-      setStatusMessage("Error updating data");
+      toast.error("Error updating data"); 
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div
         className={`${props.EditDiv} fixed top-0 left-0 bg-gray-800 opacity-80 h-screen w-full`}
       ></div>
@@ -80,9 +82,6 @@ export const EditData = (props) => {
               Update
             </button>
           </form>
-          {statusMessage && (
-            <div className="mt-3 text-center text-white">{statusMessage}</div>
-          )}
         </div>
       </div>
     </>

@@ -12,6 +12,8 @@ import ImportantTasks from "./pages/ImportantTasks";
 import IncompletedTasks from "./pages/IncompletedTasks";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 export const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,11 +27,13 @@ export const App = () => {
 
   const handleLogin = () => {
     setIsAuthenticated(true);
+    toast.success("Login successful!"); 
   };
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
     setIsAuthenticated(false);
+    toast.info("Logged out successfully.");
   };
 
   return (
@@ -37,7 +41,16 @@ export const App = () => {
       <div className="bg-gray-900 text-white h-screen p-2 relative">
         <Router>
           <Routes>
-          <Route path="/" element={isAuthenticated ? <Home onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} >
+            <Route
+              path="/"
+              element={
+                isAuthenticated ? (
+                  <Home onLogout={handleLogout} />
+                ) : (
+                  <Login onLogin={handleLogin} />
+                )
+              }
+            >
               <Route
                 index
                 element={
@@ -80,6 +93,7 @@ export const App = () => {
           </Routes>
         </Router>
       </div>
+      <ToastContainer />
     </>
   );
 };

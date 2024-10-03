@@ -44,9 +44,9 @@ const Login = ({ onLogin }) => {
 
       if (user) {
         console.log("Login successful");
-        localStorage.setItem("isAuthenticated", "true"); 
-        onLogin();
-        navigate("/");
+        localStorage.setItem("isAuthenticated", "true");
+        onLogin(); 
+        navigate("/"); 
       } else {
         setErrors({ login: "Invalid email or password" });
       }
@@ -98,3 +98,4 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
+

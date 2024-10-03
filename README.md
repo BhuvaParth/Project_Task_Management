@@ -12,6 +12,7 @@ incomplete and edit task details as needed. The data is stored in a local JSON s
 - **Toggle Task Status**: Mark tasks as complete or incomplete.
 - **Delete Tasks**: Remove tasks from the list.
 - **Filter Tasks**: View all tasks, completed tasks, or incomplete tasks.
+- **Toster Tasks**: Show toster .
 
 ## Technologies Used
 

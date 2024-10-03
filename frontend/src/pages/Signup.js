@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify"; 
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Signup = () => {
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
   const validateForm = () => {
     const errors = {};
     const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
@@ -47,9 +49,11 @@ const Signup = () => {
           formData
         );
         console.log("User registered successfully:", response.data);
-        navigate("/");
+        toast.success("Signup successful!");
+        navigate("/"); 
       } catch (error) {
         console.error("Error registering user:", error);
+        toast.error("Signup failed! Please try again.");
       }
     }
   };
