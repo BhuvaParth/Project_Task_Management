@@ -3,9 +3,17 @@ import { CgNotes } from "react-icons/cg";
 import { FaCheckDouble } from "react-icons/fa";
 import { MdLabelImportant } from "react-icons/md";
 import { TbNotebookOff } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = (props) => {
+  const navigate =useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    props.onLogout(); // Call the parent component's logout function if needed
+    navigate("/login"); // Redirect to the login page
+  };
+
   const data = [
     {
       title: "All tasks",
@@ -39,7 +47,7 @@ const Sidebar = (props) => {
         ))}
       </div>
       <div>
-        <button className="bg-gray-600 w-full rounded p-2">Log Out</button>
+        <button className="bg-gray-600 w-full rounded p-2"  onClick={handleLogout}>Log Out</button>
       </div>
     </>
   );

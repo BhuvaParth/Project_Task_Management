@@ -7,6 +7,7 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
   const validateForm = () => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,6 +44,7 @@ const Login = ({ onLogin }) => {
 
       if (user) {
         console.log("Login successful");
+        localStorage.setItem("isAuthenticated", "true"); // Set authentication state
         onLogin();
         navigate("/");
       } else {
@@ -57,7 +59,6 @@ const Login = ({ onLogin }) => {
     <div className="flex items-center justify-center h-[98vh]">
       <div className="bg-gray-800 rounded w-2/6 p-4">
         <div className="text-2xl font-semibold">Login</div>
-        {/* Email Input */}
         <input
           type="email"
           placeholder="Email"
@@ -67,7 +68,6 @@ const Login = ({ onLogin }) => {
           onChange={(e) => setEmail(e.target.value)}
         />
         {errors.email && <p className="text-red-500">{errors.email}</p>}
-        {/* Password Input */}
         <input
           type="password"
           placeholder="Password"
@@ -77,9 +77,7 @@ const Login = ({ onLogin }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         {errors.password && <p className="text-red-500">{errors.password}</p>}
-        {/* Error Message for Invalid Login */}
         {errors.login && <p className="text-red-500">{errors.login}</p>}
-        {/* Submit Button */}
         <div className="flex justify-between items-center w-full">
           <button
             className="text-black text-l font-semibold bg-blue-400 rounded px-4 py-2"

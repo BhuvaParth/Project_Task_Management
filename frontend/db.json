@@ -4,13 +4,35 @@
       "id": "e975",
       "username": "demo",
       "email": "demo@gmail.com",
-      "password": "213asd54"
+      "password": "123456"
     },
     {
       "id": "0c0e",
       "username": "ParthBhuva",
       "email": "wonted@gmail.com",
-      "password": "21323ad"
+      "password": "123456"
+    }
+  ],
+  "carddata": [
+    {
+      "title": "The Best Coding Practice",
+      "desc": "I have to create a Netflix Clone project for practice",
+      "status": "In Complete"
+    },
+    {
+      "title": "The Best Coding With NextJs",
+      "desc": "I have to create an Airbnb Clone project for practice",
+      "status": "Complete"
+    },
+    {
+      "title": "The Best Coding Self",
+      "desc": "I have to create a task management project for practice",
+      "status": "In Complete"
+    },
+    {
+      "title": "The Best Chat App",
+      "desc": "I have to create a live chat project for practice",
+      "status": "In Complete"
     }
   ]
 }

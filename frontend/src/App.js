@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Navigate,
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
 } from "react-router-dom";
-import { Home } from "./pages/Home";
 import AllTasks from "./pages/AllTasks";
-import ImportantTasks from "./pages/ImportantTasks";
 import CompletedTasks from "./pages/CompletedTasks";
+import { Home } from "./pages/Home";
+import ImportantTasks from "./pages/ImportantTasks";
 import IncompletedTasks from "./pages/IncompletedTasks";
-import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 export const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const authState = localStorage.getItem("isAuthenticated");
+    if (authState === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleLogin = () => {
     setIsAuthenticated(true);
   };
+
   const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
     setIsAuthenticated(false);
   };
 
@@ -27,10 +37,7 @@ export const App = () => {
       <div className="bg-gray-900 text-white h-screen p-2 relative">
         <Router>
           <Routes>
-            <Route
-              path="/"
-              element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
-            >
+          <Route path="/" element={isAuthenticated ? <Home onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} >
               <Route
                 index
                 element={
