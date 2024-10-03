@@ -33,7 +33,7 @@ incomplete and edit task details as needed. The data is stored in a local JSON s
 
   ``` bash
    npm install
-   npm run dev
+   npm run start
   ```
 
   ##  Start Json Server
